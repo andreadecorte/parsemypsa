@@ -3,12 +3,14 @@
 from peewee import *
 import datetime
 
-sqlite_db = SqliteDatabase('my_app.db')
+# Initialize without DB, will be specified at runtime
+database = SqliteDatabase(None)
+
 
 class BaseModel(Model):
     """A base model that will use our Sqlite database."""
     class Meta:
-        database = sqlite_db
+        database = database
 
 
 class Trip(BaseModel):

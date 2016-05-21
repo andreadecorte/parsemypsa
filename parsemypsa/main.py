@@ -2,7 +2,7 @@
 
 from _version import __version__ as VERSION
 from parsing_input import input_parser
-from storage import setup
+from storage import objects, setup
 
 import argparse
 import json
@@ -18,6 +18,7 @@ def main():
     parser.add_argument('input_file', metavar='input_file', nargs='?', help='input file to parse')
     parser.add_argument('--log-level', dest='log_level', help='logging level (e.g. DEBUG)', default='INFO')
     parser.add_argument('--version', dest='version', action='store_true', help='show the version and exit')
+    parser.add_argument('--db-file', dest='db_file', default=':memory:', help='specify sqlite3 to use as destination, if not specified db will be IN Memory')
 
     args = parser.parse_args()
     
@@ -29,15 +30,16 @@ def main():
     if not isinstance(numeric_level, int):
         raise ValueError('Invalid log level: %s' % args.log_level)
     logging.basicConfig(level=numeric_level)
+    logging.debug("Arguments: %s" % args)
     
     with open('../my_psa1539272400.trips') as f:
         input_file = json.load(f)
 
+    objects.database.init(args.db_file)
     setup.create_tables()
 
     vin, trips, info = input_parser.parse_input_file(input_file)
     logging.debug("Trips read: %i" % len(trips))
-
 
     
 def print_version():
