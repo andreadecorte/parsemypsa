@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 
 from _version import __version__ as VERSION
-import input_parser
-from trip import Trip
+from parsing_input import input_parser
+from storage import setup
 
 import argparse
 import json
@@ -33,8 +33,11 @@ def main():
     with open('../my_psa1539272400.trips') as f:
         input_file = json.load(f)
 
+    setup.create_tables()
+
     vin, trips, info = input_parser.parse_input_file(input_file)
     logging.debug("Trips read: %i" % len(trips))
+
 
     
 def print_version():

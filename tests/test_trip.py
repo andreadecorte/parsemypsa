@@ -1,13 +1,13 @@
 #!/usr/bin/env python
 
-from parsemypsa import trip
-
 import unittest
+
+from parsemypsa.storage import objects
 
 
 class TripTestCase(unittest.TestCase):
     def setUp(self):
-        self.trip1 = trip.Trip(1, 1462731168, 200, 1000, 1, 0, 0)
+        self.trip1 = objects.Trip.create(id=1, 1462731168, 200, 1000, 1, 0, 0)
 
     def test_mileage_calculation(self):
         self.trip1.calculate_mileage()

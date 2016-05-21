@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 from peewee import *
-
+import datetime
 
 sqlite_db = SqliteDatabase('my_app.db')
 
@@ -10,7 +10,35 @@ class BaseModel(Model):
     class Meta:
         database = sqlite_db
 
+
+class Trip(BaseModel):
+    """Represents a Trip"""
+    id = IntegerField(primary_key=True)
+    timestamp = IntegerField()
+    # Seconds?
+    duration = IntegerField()
+    # Meters
+    distance = IntegerField()
+    # liters
+    fuel_consumation = FloatField()
+    typ = IntegerField()
+    merged = SmallIntegerField()
+
+    # Calculated
+    mileage = FloatField(null=True)
+
+    def calculate_mileage(self):
+        self.mileage = self.distance / self.fuel_consumation
+        
+    def return_formatted_date(self):
+        return datetime.datetime.fromtimestamp(int(self.timestamp)).strftime('%Y-%m-%d %H:%M:%S')
+
+    def __str__(self):
+        return "Trip %s lasted %i" % (self.id, self.duration)
+
+
 class VehiculeInformation(BaseModel):
+    vin = CharField(primary_key=True)
     updatedon = IntegerField()
     mileage = IntegerField()
     endlatitude = DoubleField()
@@ -24,15 +52,11 @@ class VehiculeInformation(BaseModel):
     fuelautonomy = IntegerField()
     endpositionaddrtext = CharField()
     destinationpositionaddrtext = CharField()
-    #alerts
 
-
-def create_tables():
-    sqlite_db.connect()
-    sqlite_db.create_tables([Alert], True)
 
 class Alert(BaseModel):
-    id = SmallIntegerField()
+    vin = ForeignKeyField(VehiculeInformation, related_name='alerts')
+    id = SmallIntegerField(primary_key=True)
     date = IntegerField()
     is_solved = SmallIntegerField(null=True)
 
