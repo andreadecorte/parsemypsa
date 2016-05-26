@@ -3,6 +3,7 @@
 from _version import __version__ as VERSION
 from parsing_input import input_parser
 from storage import objects, setup
+from output import console_ui
 
 import argparse
 import json
@@ -41,6 +42,8 @@ def main():
     vin, trips, info = input_parser.parse_input_file(input_file)
     logging.debug("Trips read: %i" % len(trips))
 
+    console_ui.display()
+
     
 def print_version():
     """Print version and exits"""
@@ -49,4 +52,8 @@ def print_version():
 
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except KeyboardInterrupt:
+        logging.info("Exiting")
+        sys.exit(1)

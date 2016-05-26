@@ -18,8 +18,8 @@ config = {
     'version': _version.__version__,
     'license': 'MIT',
     'platforms': 'ALL',
-    'install_requires': ['peewee'],
-    'packages': ['parsemypsa', 'parsemypsa.parsing_input'],
+    'install_requires': ['peewee>=2.8.1', 'prompt-toolkit>=1.0'],
+    'packages': ['parsemypsa', 'parsemypsa.parsing_input', 'parsemypsa.storage', 'parsemypsa.output'],
     'classifiers': [
         'License :: OSI Approved :: MIT License',
         'Environment :: Console',
