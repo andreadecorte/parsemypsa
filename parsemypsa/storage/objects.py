@@ -28,10 +28,16 @@ class Trip(BaseModel):
 
     # Calculated
     mileage = FloatField(null=True)
+    mileage_kml = FloatField(null=True)
 
     def calculate_mileage(self):
-        self.mileage = self.distance / self.fuel_consumation
-        
+        """l / 100 km"""
+        self.mileage = self.fuel_consumation / ((self.distance / 1000) / 100)
+
+    def calculate_mileage_kml(self):
+        """km / l"""
+        self.mileage_kml = (self.distance / 1000) / self.fuel_consumation
+
     def return_formatted_date(self):
         return datetime.datetime.fromtimestamp(int(self.timestamp)).strftime('%Y-%m-%d %H:%M:%S')
 
