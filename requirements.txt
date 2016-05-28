@@ -1,0 +1,4 @@
+peewee==2.8.1
+prompt-toolkit==1.0.0
+wcwidth==0.1.6
+pygments==2.1.3

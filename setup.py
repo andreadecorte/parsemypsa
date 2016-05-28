@@ -4,17 +4,24 @@ try:
     from setuptools import setup
 except ImportError:
     from distutils.core import setup
+import os
     
 from parsemypsa import _version
+
+
+def _read(fn):
+    path = os.path.join(os.path.dirname(__file__), fn)
+    return open(path).read()
     
 
 config = {
     'name': 'parsemypsa',
     'description': 'ParseMyPSA parses files exported from LinkMyPeugeot app',
+    'long_description': _read('README.rst'),
     'author': 'Andrea Decorte',
     'url': 'https://github.com/klenje/parsemypsa',
     'download_url': 'https://github.com/klenje/parsemypsa',
-    #'author_email': 'My email.',
+    # 'author_email': 'My email.',
     'version': _version.__version__,
     'license': 'MIT',
     'platforms': 'ALL',
