@@ -4,7 +4,7 @@ import logging
 
 from prompt_toolkit import prompt
 
-from output import computation
+from parsemypsa.output import computation
 
 
 def display():
@@ -21,4 +21,4 @@ def display():
 
 
 def return_menu():
-    return "\n\n0 to exit:\n1 to to display average consumption\n2 to display average consumptio (km/l)\n"
+    return "\n\n0 to exit:\n1 to to display average consumption\n2 to display average consumption (km/l)\n"

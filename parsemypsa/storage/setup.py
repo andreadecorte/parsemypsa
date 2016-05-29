@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-from storage import objects
+from parsemypsa.storage import objects
 
 import logging
 from peewee import *
