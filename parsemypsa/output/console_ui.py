@@ -6,19 +6,31 @@ from prompt_toolkit import prompt
 
 from parsemypsa.output import computation
 
+menu_actions = {
+    0: "exit",
+    1: "display average consumption",
+    2: "display average consumption (km/l)"
+}
+
 
 def display():
     answer = 1
     while answer != 0:
-        answer = int(prompt(return_menu()))
+        try:
+            raw_answer = prompt(return_menu())
+            answer = int(raw_answer)
 
-        if answer == 1:
-            computation.compute_mileage()
-        elif answer == 2:
-            computation.compute_mileage_kml()
-        else:
-            logging.warning("Invalid choice %s" % answer)
+            if answer == 1:
+                print("Average consumption: %f" % computation.compute_mileage())
+            elif answer == 2:
+                print("Average consumption (km/l): %f" % computation.compute_mileage_kml())
+            else:
+                # Don't log an error if you want to exit
+                if answer != 0:
+                    logging.warning("Invalid choice %i" % answer)
+        except ValueError:
+            logging.warning("Invalid choice %s" % raw_answer)
 
 
 def return_menu():
-    return "\n\n0 to exit:\n1 to to display average consumption\n2 to display average consumption (km/l)\n"
+    return "\n".join("%i to %s" % (key, val) for key, val in menu_actions.items()) + "\n"
