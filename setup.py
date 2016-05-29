@@ -26,6 +26,8 @@ config = {
     'license': 'MIT',
     'platforms': 'ALL',
     'install_requires': ['peewee>=2.8.1', 'prompt-toolkit>=1.0'],
+    'setup_requires': ['pytest-runner'],
+    'test_requires': ['pytest>=2.9.1'],
     'packages': ['parsemypsa', 'parsemypsa.parsing_input', 'parsemypsa.storage', 'parsemypsa.output'],
     'classifiers': [
         'License :: OSI Approved :: MIT License',

@@ -30,3 +30,11 @@ class TripTestCase(unittest.TestCase):
             self.prepare_db()
             self.assertEqual(computation.compute_mileage_kml(), 10.0)
 
+    def test_mileage_calculation_empty_db(self):
+        with test_database(test_db, model_list):
+            self.assertEqual(computation.compute_mileage(), 0.0)
+
+    def test_mileage_calculation_kml_empty_db(self):
+        with test_database(test_db, model_list):
+            self.assertEqual(computation.compute_mileage_kml(), 0.0)
+

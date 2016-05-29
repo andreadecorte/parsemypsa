@@ -13,10 +13,10 @@ def compute_mileage():
         logging.debug("%f, %f, %f" % (trip.fuel_consumation, trip.distance, trip.mileage))
         mileage = mileage + trip.mileage
 
-        try:
-            result = mileage / len(objects.Trip.select())
-        except ZeroDivisionError:
-            logging.warning("No trips in the DB!")
+    try:
+        result = mileage / len(objects.Trip.select())
+    except ZeroDivisionError:
+        logging.warning("No trips in the DB!")
 
     logging.debug("Average consumption: %f" % result)
     return result
