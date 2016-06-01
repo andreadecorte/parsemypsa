@@ -37,3 +37,17 @@ def compute_mileage_kml():
 
     logging.debug("Average consumption (km/l): %f" % result)
     return result
+
+
+def compute_average_trip_duration():
+    result = 0.0
+    for trip in objects.Trip.select():
+        result = result + trip.duration
+
+    try:
+        result /= len(objects.Trip.select())
+    except ZeroDivisionError:
+        logging.warning("No trips in the DB!")
+
+    logging.debug("Average trip duration: %f" % result)
+    return result
