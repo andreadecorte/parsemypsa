@@ -14,7 +14,8 @@ def compute_mileage():
         mileage = mileage + trip.mileage
 
     try:
-        result = mileage / len(objects.Trip.select())
+        # rounded to 3 decimals
+        result = round(mileage / len(objects.Trip.select()), 3)
     except ZeroDivisionError:
         logging.warning("No trips in the DB!")
 
@@ -31,7 +32,8 @@ def compute_mileage_kml():
         mileage_kml = mileage_kml + trip.mileage_kml
 
     try:
-        result = mileage_kml / len(objects.Trip.select())
+        # rounded to 3 decimals
+        result = round(mileage_kml / len(objects.Trip.select()), 3)
     except ZeroDivisionError:
         logging.warning("No trips in the DB!")
 
@@ -46,8 +48,25 @@ def compute_average_trip_duration():
 
     try:
         result /= len(objects.Trip.select())
+        result = round(result, 3)
     except ZeroDivisionError:
         logging.warning("No trips in the DB!")
 
     logging.debug("Average trip duration: %f" % result)
+    return result
+
+
+def compute_average_trip_length():
+    """Average length in meters for the trip"""
+    result = 0.0
+    for trip in objects.Trip.select():
+        result = result + trip.distance
+
+    try:
+        result /= len(objects.Trip.select())
+        result = round(result, 3)
+    except ZeroDivisionError:
+        logging.warning("No trips in the DB!")
+
+    logging.debug("Average trip length (meters): %f" % result)
     return result
