@@ -31,13 +31,12 @@ def main():
         logging.basicConfig(level=numeric_level)
         logging.debug("Arguments: %s" % args)
 
-        with open('my_psa1539272400.trips') as f:
-            input_file = json.load(f)
+        parsed_file = file_opener(args=args)
 
         objects.database.init(args.db_file)
         setup.create_tables()
 
-        vin, trips, info = input_parser.parse_input_file(input_file)
+        vin, trips, info = input_parser.parse_input_file(parsed_file)
         logging.debug("Trips read: %i" % len(trips))
 
         console_ui.display()
@@ -45,7 +44,17 @@ def main():
         logging.info("Exiting")
         sys.exit(1)
 
-    
+
+def file_opener(args):
+    if not args.input_file:
+        # TODO offer list of files in current folder
+        logging.warning("You need to specify an input file!")
+        sys.exit(2)
+    with open(args.input_file) as f:
+        parsed_file = json.load(f)
+    return parsed_file
+
+
 def print_version():
     """Print version and exits"""
     print(VERSION)
