@@ -8,8 +8,9 @@ from parsemypsa.output import computation
 
 menu_actions = {
     0: "exit",
-    1: "display average consumption",
-    2: "display average consumption (km/l)"
+    1: "display vehicle information",
+    2: "display average consumption",
+    3: "display average consumption (km/l)"
 }
 
 
@@ -21,8 +22,10 @@ def display():
             answer = int(raw_answer)
 
             if answer == 1:
-                print("Average consumption: %f" % computation.compute_mileage())
+                print("%s" % computation.display_basic_info())
             elif answer == 2:
+                    print("Average consumption: %f" % computation.compute_mileage())
+            elif answer == 3:
                 print("Average consumption (km/l): %f" % computation.compute_mileage_kml())
             else:
                 # Don't log an error if you want to exit

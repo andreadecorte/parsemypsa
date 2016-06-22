@@ -19,6 +19,7 @@ class OutputComputationTestCase(unittest.TestCase):
     def prepare_db(self):
         self.trip1 = objects.Trip.create(id=1, timestamp=1462731168, duration=200, distance=10000, fuel_consumation=1, typ=0, merged=0)
         self.trip2 = objects.Trip.create(id=2, timestamp=1462731168, duration=400, distance=7500, fuel_consumation=1, typ=0, merged=0)
+        self.vin1 = objects.VehiculeInformation.create(vin="A6789BHN", updatedon=1465420687, mileage=37150, endlatitude=0, endlongitude=0, destlatitude=-1, destlongitude=-1, distancetonextmaintenance=19200, daysuntilnextmaintenance=65535, maintenancepassed=0, fuellevel=35, fuelautonomy=310, endpositionaddrtext="", destinationpositionaddrtext="")
 
     def test_mileage_calculation(self):
         with test_database(test_db, model_list):
@@ -55,3 +56,12 @@ class OutputComputationTestCase(unittest.TestCase):
     def test_average_trip_length_empty_db(self):
         with test_database(test_db, model_list):
             self.assertEqual(computation.compute_average_trip_length(), 0.0)
+
+    def test_display_basic_info(self):
+        with test_database(test_db, model_list):
+            self.prepare_db()
+            self.assertEqual(computation.display_basic_info(), "Info about vehicle A6789BHN: Mileage: 37150 Autonomy: 310 Fuel level: 35.0 Next manteinance in 19200 km")
+
+    def test_display_basic_info_empty_db(self):
+        with test_database(test_db, model_list):
+            self.assertEqual(computation.display_basic_info(), "")

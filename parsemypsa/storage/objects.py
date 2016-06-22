@@ -48,7 +48,7 @@ class Trip(BaseModel):
 class VehiculeInformation(BaseModel):
     vin = CharField(primary_key=True)
     updatedon = IntegerField()
-    mileage = IntegerField()
+    mileage = IntegerField()  # Hectometers
     endlatitude = DoubleField()
     endlongitude = DoubleField()
     destlatitude = DoubleField()

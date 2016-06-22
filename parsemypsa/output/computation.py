@@ -70,3 +70,15 @@ def compute_average_trip_length():
 
     logging.debug("Average trip length (meters): %f" % result)
     return result
+
+
+def display_basic_info():
+    """Returns basic info on the vehicle"""
+    result = ""
+    try:
+        info = objects.VehiculeInformation.select()[0]
+        result = "Info about vehicle {}: Mileage: {} Autonomy: {} Fuel level: {} Next manteinance in {} km".format(info.vin, info.mileage, info.fuelautonomy, info.fuellevel, info.distancetonextmaintenance)
+    except IndexError:
+        logging.warning("Empty DB!")
+    logging.debug(result)
+    return result
