@@ -2,6 +2,7 @@
 
 import logging
 import sys
+
 import pytest
 
 from parsemypsa import main
@@ -57,3 +58,28 @@ def test_version():
     with pytest.raises(SystemExit) as excinfo:
         main.main()
         assert excinfo.code == 0
+
+
+def test_input_file_not_found():
+    # Clear args
+    sys.argv.clear()
+    # First is program name
+    sys.argv.append("parseMyPSA")
+    # Then positional arguments
+    sys.argv.append("test.trip")
+    args = main.option_parser()
+    assert args.input_file == "test.trip"
+    with pytest.raises(FileNotFoundError):
+        _ = main.file_opener(args)
+
+
+def test_input_file_not_specified():
+    # Clear args
+    sys.argv.clear()
+    # First is program name
+    sys.argv.append("parseMyPSA")
+    # No positional arguments
+    args = main.option_parser()
+    assert args.input_file == None
+    with pytest.raises(SystemExit):
+        _ = main.file_opener(args)
