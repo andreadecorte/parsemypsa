@@ -14,17 +14,20 @@ menu_actions = {
 }
 
 
-def display():
+def display(one_shot=False):
+    """:param one_shot True if we want to use just 1 answer, not an infinite loop (for tests)"""
     answer = 1
-    while answer != 0:
+    # variable to avoid a continuous loop whuich makes hard unit tests
+    passed = False
+    while answer != 0 and not (one_shot and passed):
         try:
-            raw_answer = prompt(return_menu())
+            raw_answer = input(return_menu())
             answer = int(raw_answer)
 
             if answer == 1:
                 print("%s" % computation.display_basic_info())
             elif answer == 2:
-                    print("Average consumption: %f" % computation.compute_mileage())
+                print("Average consumption: %f" % computation.compute_mileage())
             elif answer == 3:
                 print("Average consumption (km/l): %f" % computation.compute_mileage_kml())
             else:
@@ -33,6 +36,8 @@ def display():
                     logging.warning("Invalid choice %i" % answer)
         except ValueError:
             logging.warning("Invalid choice %s" % raw_answer)
+        finally:
+            passed = True
 
 
 def return_menu():
