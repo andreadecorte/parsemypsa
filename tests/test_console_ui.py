@@ -39,7 +39,7 @@ def test_display_1(capsys):
         with unittest.mock.patch('builtins.input', return_value="1"):
             console_ui.display(one_shot=True)
             out, err = capsys.readouterr()
-            assert out == "Info about vehicle A6789BHN: Mileage: 37150 Autonomy: 310 Fuel level: 35.0 Next manteinance in 19200 km\n"
+            assert out == "vehicle information:\nInfo about vehicle A6789BHN: Mileage: 37150 Autonomy: 310 Fuel level: 35.0 Next manteinance in 19200 km\n"
 
 
 def test_display_2(capsys):
@@ -48,7 +48,7 @@ def test_display_2(capsys):
         with unittest.mock.patch('builtins.input', return_value="2"):
             console_ui.display(one_shot=True)
             out, err = capsys.readouterr()
-            assert out == "Average consumption: 11.667000\n"
+            assert out == "average consumption:\n11.667\n"
 
 
 def test_display_3(capsys):
@@ -57,7 +57,8 @@ def test_display_3(capsys):
         with unittest.mock.patch('builtins.input', return_value="3"):
             console_ui.display(one_shot=True)
             out, err = capsys.readouterr()
-            assert out == "Average consumption (km/l): 8.750000\n"
+            assert out == "average consumption (km/l):\n8.75\n"
+
 
 def test_display_invalid_choice(capsys):
     with test_database(test_db, model_list):

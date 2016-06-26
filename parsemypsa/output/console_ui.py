@@ -6,12 +6,17 @@ from prompt_toolkit import prompt
 
 from parsemypsa.output import computation
 
-menu_actions = {
-    0: "exit",
-    1: "display vehicle information",
-    2: "display average consumption",
-    3: "display average consumption (km/l)"
-}
+
+def menu_actions():
+    """Encapsulate the actions to execute for lazy evaluation"""
+    # Maps an int to its message and the connected method (except for exit)
+    actions = {
+        0: ("exit", "bye"),
+        1: ("vehicle information", computation.display_basic_info()),
+        2: ("average consumption", computation.compute_mileage()),
+        3: ("average consumption (km/l)", computation.compute_mileage_kml())
+    }
+    return actions
 
 
 def display(one_shot=False):
@@ -24,21 +29,12 @@ def display(one_shot=False):
             raw_answer = input(return_menu())
             answer = int(raw_answer)
 
-            if answer == 1:
-                print("%s" % computation.display_basic_info())
-            elif answer == 2:
-                print("Average consumption: %f" % computation.compute_mileage())
-            elif answer == 3:
-                print("Average consumption (km/l): %f" % computation.compute_mileage_kml())
-            else:
-                # Don't log an error if you want to exit
-                if answer != 0:
-                    logging.warning("Invalid choice %i" % answer)
-        except ValueError:
+            print("%s:\n%s" % (menu_actions()[answer][0], menu_actions()[answer][1]))
+        except (ValueError, KeyError):
             logging.warning("Invalid choice %s" % raw_answer)
         finally:
             passed = True
 
 
 def return_menu():
-    return "\n".join("%i to %s" % (key, val) for key, val in menu_actions.items()) + "\n"
+    return "\n".join("%i for %s" % (key, val[0]) for key, val in menu_actions().items()) + "\n"
