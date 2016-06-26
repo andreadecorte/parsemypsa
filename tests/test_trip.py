@@ -32,4 +32,4 @@ class TripTestCase(unittest.TestCase):
 
     def test_to_string(self):
         with test_database(test_db, model_list):
-            self.assertEqual(str(self.trip1), "Trip 1 lasted 200")
+            self.assertEqual(str(self.trip1), "Trip 1 started on 1462731168, lasted 200 minutes and 10000 m")

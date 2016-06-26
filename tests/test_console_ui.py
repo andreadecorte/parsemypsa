@@ -60,6 +60,15 @@ def test_display_3(capsys):
             assert out == "average consumption (km/l):\n8.75\n"
 
 
+def test_display_4(capsys):
+    with test_database(test_db, model_list):
+        prepare_db()
+        with unittest.mock.patch('builtins.input', return_value="4"):
+            console_ui.display(one_shot=True)
+            out, err = capsys.readouterr()
+            assert out == "last trip info:\nTrip 2 started on 1462731168, lasted 400 minutes and 7500 m\n"
+
+
 def test_display_invalid_choice(capsys):
     with test_database(test_db, model_list):
         prepare_db()

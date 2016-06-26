@@ -8,12 +8,27 @@ This is **NOT AN OFFICIAL tool** and it's not linked in any way to Peugeot.
 
 Requirements
 ============
-* `Python <http://www.python.org`_
+* `Python <http://www.python.org>`_
 * `peewee <https://github.com/coleifer/peewee>`_
 * `prompt-toolkit <https://github.com/jonathanslenders/python-prompt-toolkit>`_
 
+Features
+========
+* Average info on trips and consumption
+* Last trip info
+
+Coming next:
+
+* Custom queries
+
 Installation
 ============
+
+
+Testing
+=======
+This script is using tox, so just launch it (if you want with a specific environment)
+`tox -e py35`
 
 How to use
 ==========

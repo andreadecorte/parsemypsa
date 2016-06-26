@@ -42,7 +42,7 @@ class Trip(BaseModel):
         return datetime.datetime.fromtimestamp(int(self.timestamp)).strftime('%Y-%m-%d %H:%M:%S')
 
     def __str__(self):
-        return "Trip %s lasted %i" % (self.id, self.duration)
+        return "Trip %s started on %s, lasted %i minutes and %i m" % (self.id, self.timestamp, self.duration, self.distance)
 
 
 class VehiculeInformation(BaseModel):

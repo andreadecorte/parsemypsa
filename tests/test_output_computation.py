@@ -57,6 +57,11 @@ class OutputComputationTestCase(unittest.TestCase):
         with test_database(test_db, model_list):
             self.assertEqual(computation.compute_average_trip_length(), 0.0)
 
+    def test_average_trip_info(self):
+        with test_database(test_db, model_list):
+            self.prepare_db()
+            self.assertEqual(computation.display_average_trip_info(), "Length: 8750.0 Duration: 300.0")
+
     def test_display_basic_info(self):
         with test_database(test_db, model_list):
             self.prepare_db()
@@ -65,3 +70,7 @@ class OutputComputationTestCase(unittest.TestCase):
     def test_display_basic_info_empty_db(self):
         with test_database(test_db, model_list):
             self.assertEqual(computation.display_basic_info(), "")
+
+    def test_last_trip_empty_db(self):
+        with test_database(test_db, model_list):
+            self.assertEqual(computation.display_last_trip(), "")

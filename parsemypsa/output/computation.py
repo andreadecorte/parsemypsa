@@ -82,3 +82,19 @@ def display_basic_info():
         logging.warning("Empty DB!")
     logging.debug(result)
     return result
+
+
+def display_last_trip():
+    """Returns summary on last registered trip"""
+    result = ""
+    try:
+        # Order by id DESC, take the first one, timestamp could be used too
+        result = objects.Trip.select().order_by(objects.Trip.id.desc())[0]
+    except IndexError:
+        logging.warning("Empty DB!")
+    logging.debug(result)
+    return result
+
+
+def display_average_trip_info():
+    return "Length: %s Duration: %s" % (compute_average_trip_length(), compute_average_trip_duration())
