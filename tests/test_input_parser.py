@@ -17,14 +17,15 @@ model_list = [objects.Alert, objects.VehiculeInformation, objects.Trip]
 
 
 def test_input_file():
+    input_file = "tests/trips.test"
     # Clear args
     sys.argv.clear()
     # First is program name
     sys.argv.append("parseMyPSA")
     # Then positional arguments
-    sys.argv.append("tests/test.trips")
+    sys.argv.append(input_file)
     args = main.option_parser()
-    assert args.input_file == "tests/test.trips"
+    assert args.input_file == input_file
     parsed_file = main.file_opener(args)
     with test_database(test_db, model_list):
         vin, trips, info = input_parser.parse_input_file(parsed_file)
