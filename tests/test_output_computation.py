@@ -74,3 +74,12 @@ class OutputComputationTestCase(unittest.TestCase):
     def test_last_trip_empty_db(self):
         with test_database(test_db, model_list):
             self.assertEqual(computation.display_last_trip(), "")
+
+    def test_display_trip_list(self):
+        with test_database(test_db, model_list):
+            self.prepare_db()
+            self.assertEqual(computation.display_trip_list(), "Trip 1 started on 1462731168, lasted 200 minutes and 10000 m\nTrip 2 started on 1462731168, lasted 400 minutes and 7500 m\n")
+
+    def test_display_trip_list_empty_db(self):
+        with test_database(test_db, model_list):
+            self.assertEqual(computation.display_trip_list(), "")

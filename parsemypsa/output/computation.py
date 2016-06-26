@@ -98,3 +98,13 @@ def display_last_trip():
 
 def display_average_trip_info():
     return "Length: %s Duration: %s" % (compute_average_trip_length(), compute_average_trip_duration())
+
+
+def display_trip_list():
+    """Display the list of all the trips"""
+    result = ""
+    for trip in objects.Trip.select():
+        result += "%s\n" % trip
+
+    logging.debug("List of trips: %s" % result)
+    return result

@@ -1,6 +1,9 @@
 ==========
 ParseMyPSA
 ==========
+.. image:: https://travis-ci.org/klenje/parsemypsa.svg?branch=master
+    :target: https://travis-ci.org/klenje/parsemypsa
+
 ``parsemypsa`` has the purpose of analyzing the export files of LinkMyPeugeot app. It includes for now a
 fixed selection of metrics.
 

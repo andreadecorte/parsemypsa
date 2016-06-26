@@ -16,7 +16,8 @@ def menu_actions():
         2: ("average consumption", computation.compute_mileage()),
         3: ("average consumption (km/l)", computation.compute_mileage_kml()),
         4: ("last trip info", computation.display_last_trip()),
-        5: ("average trip info", computation.display_average_trip_info())
+        5: ("average trip info", computation.display_average_trip_info()),
+        6: ("trip list", computation.display_trip_list())
     }
     return actions
 
