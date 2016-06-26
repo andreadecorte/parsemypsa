@@ -39,7 +39,8 @@ class Trip(BaseModel):
         self.mileage_kml = (self.distance / 1000) / self.fuel_consumation
 
     def return_formatted_date(self):
-        return datetime.datetime.fromtimestamp(int(self.timestamp)).strftime('%Y-%m-%d %H:%M:%S')
+        """Returns UTC date"""
+        return datetime.datetime.utcfromtimestamp(int(self.timestamp)).strftime('%Y-%m-%d %H:%M:%S')
 
     def __str__(self):
         return "Trip %s started on %s, lasted %i minutes and %i m" % (self.id, self.timestamp, self.duration, self.distance)

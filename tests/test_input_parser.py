@@ -22,9 +22,9 @@ def test_input_file():
     # First is program name
     sys.argv.append("parseMyPSA")
     # Then positional arguments
-    sys.argv.append("test.trips")
+    sys.argv.append("tests/test.trips")
     args = main.option_parser()
-    assert args.input_file == "test.trips"
+    assert args.input_file == "tests/test.trips"
     parsed_file = main.file_opener(args)
     with test_database(test_db, model_list):
         vin, trips, info = input_parser.parse_input_file(parsed_file)

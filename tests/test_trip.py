@@ -28,7 +28,7 @@ class TripTestCase(unittest.TestCase):
 
     def test_formatted_date(self):
         with test_database(test_db, model_list):
-            self.assertEqual(self.trip1.return_formatted_date(), "2016-05-08 20:12:48")
+            self.assertEqual(self.trip1.return_formatted_date(), "2016-05-08 18:12:48")
 
     def test_to_string(self):
         with test_database(test_db, model_list):
