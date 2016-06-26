@@ -23,12 +23,25 @@ Coming next:
 
 Installation
 ============
+If you cloned this repository, you can create a tarball with::
 
+    python setup.py sdist
+
+This will create an archive, that you can install (ideally on a venv) with::
+
+    pip install <archive>
+
+Then the launcher should be available in your $PATH
+
+*Hint*: Launching tox as explained below will also generate a zip file that you can reuse directly
 
 Testing
 =======
-This script is using tox, so just launch it (if you want with a specific environment)
-`tox -e py35`
+This script is using tox, so just launch it (if you want with a specific environment)::
+
+    tox -e py35
+
+This will also show the code coverage for the tests.
 
 How to use
 ==========
